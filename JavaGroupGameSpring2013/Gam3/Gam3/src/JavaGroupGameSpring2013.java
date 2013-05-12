@@ -28,6 +28,7 @@ public class JavaGroupGameSpring2013 {
 				//Changed the window so game resizes with window... Mr. Roche.
 		
 		System.out.println("Hi made a change on the computer next to hopper");
+		System.out.println("Hi, I made this change on the Hopper Computer..."); 
 	}
 
 }
