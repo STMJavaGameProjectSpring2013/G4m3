@@ -7,7 +7,6 @@ public class GameObject {
 
 	static int objectIDNum = 0;
 	//Instance Variables
-	//New Rule this assumes that x, y is the top right corner of the object -- FOR Everybody
 	int xLoc, yLoc; 
 	int objW; 
 	int objH;
@@ -17,7 +16,6 @@ public class GameObject {
 	//X and Y coordinates are relative(Extra) to xLoc and yLoc
 	int bBoxExtraX, bBoxExtraY;
 	int bBoxW, bBoxH;
-	int newBBoxX, newBBoxY, newBBoxW, newBBoxH;
 	String objIDString = null;
 	
 	
@@ -36,8 +34,6 @@ public class GameObject {
 		whoAmI = objectIDNum;
 		objIDString = new String ("Obj# ").concat(Integer.toString(objectIDNum) + "("+ type + ")");
 		//System.out.println("I just created a game object");
-		
-		//NOW Following the Rule that this is the top right of the object
 		xLoc = (int)(Math.random()*(w-100))+50;
 		yLoc = (int)(Math.random()*(w-100))+50;
 		timeOfCreation = System.currentTimeMillis();
@@ -184,14 +180,6 @@ public class GameObject {
 		bBoxExtraY = extraY; 
 		bBoxW = w;
 		bBoxH = h;
-	}
-	
-	public void setNewBBox(int xFromXLoc, int yFromYLoc,int BBwidth,int BBheight){
-		newBBoxX = xFromXLoc;
-		newBBoxY = yFromYLoc;
-		newBBoxW = BBwidth;
-		newBBoxH = BBheight;
-		
 	}
 	
 	public int getBBoxX(){
