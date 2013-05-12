@@ -17,7 +17,7 @@ public class GameObject {
 	//X and Y coordinates are relative(Extra) to xLoc and yLoc
 	int bBoxExtraX, bBoxExtraY;
 	int bBoxW, bBoxH;
-	int newBBoxX, newBBoxY, newBBoxW, newBBoxH;
+	int newBBoxX = 0, newBBoxY =0, newBBoxW=0, newBBoxH=0;
 	String objIDString = null;
 	
 	
@@ -43,9 +43,9 @@ public class GameObject {
 		timeOfCreation = System.currentTimeMillis();
 		nextSpawnTime = timeOfCreation+reproductionCycle+(long)(Math.random()*8000);
 		checkOutTime = timeOfCreation+lifeCycle+(long)(Math.random()*10000);
-		System.out.println("object Number " + objectIDNum + " time of creation: " + timeOfCreation);
-		System.out.println("CheckoutTime for " + objectIDNum + " is " + checkOutTime);
-		System.out.println("ObjIDString is: " + objIDString);
+		//System.out.println("object Number " + objectIDNum + " time of creation: " + timeOfCreation);
+		//System.out.println("CheckoutTime for " + objectIDNum + " is " + checkOutTime);
+		//System.out.println("ObjIDString is: " + objIDString);
 		
 	}
 
@@ -124,32 +124,35 @@ public class GameObject {
 		int rightFrame = 15;
 		int bottomFrame = 30;
 		
+		
+		//Check Left
 		if(getDX() < 0){
-			if(getXLoc()-(int)(getObjWidth()/2) < 0){
-				setXLoc((int)(getObjWidth()/2));
+			if(getXLoc() < 0){
+				setXLoc(0);
 				setDX(getDX()*-1);
 			}
 		}
 		
+		//Check right
 		if(getDX() > 0){
-			if((getXLoc()+(int)(getObjWidth()/2)) > (panelWidth-rightFrame)){
-				setXLoc(panelWidth-(int)(getObjWidth()/2)-rightFrame);
+			if((getXLoc()+getObjWidth()) > panelWidth){
+				setXLoc(panelWidth-getObjWidth());
 				setDX(getDX()*-1);
 			}
 		}
 		
-		
+		//Check top
 		if(getDY() < 0){
-			if(getYLoc()-(int)(getObjHeight()/2) < 0){
-				setYLoc((int)(getObjHeight()/2));
+			if(getYLoc() < 0){
+				setYLoc(0);
 				setDY(getDY()*-1);
 			}
 		}
 		
-		
+		//Check bottom
 		if(getDY() > 0){
-			if(getYLoc()+(int)(getObjHeight()/2) > (panelHeight-bottomFrame)){
-				setYLoc(panelHeight-(int)(getObjHeight()/2)-bottomFrame);
+			if(getYLoc()+(int)(getObjHeight()) > panelHeight-bottomFrame){
+				setYLoc(panelHeight-getObjHeight()-bottomFrame);
 				setDY(getDY()*-1);
 			}
 		}
@@ -195,19 +198,32 @@ public class GameObject {
 	}
 	
 	public int getBBoxX(){
-		return xLoc + bBoxExtraX;
+		//return xLoc + bBoxExtraX;
+		return this.newBBoxX;
 	}
 	
 	public int getBBoxY(){
-		return yLoc + bBoxExtraY;
+		//return yLoc + bBoxExtraY;
+		return this.newBBoxY;
+	}
+	
+	public int getBBoxXLoc(){
+		return xLoc+newBBoxX;
+	}
+	
+	
+	public int getBBoxYLoc(){
+		return yLoc+newBBoxY;
 	}
 	
 	public int getBBoxW(){
-		return bBoxW;
+		//return bBoxW;
+		return this.newBBoxW;
 	}
 	
 	public int getBBoxH(){
-		return bBoxH;
+		//return bBoxH;
+		return this.newBBoxH;
 	}
 	
 	
@@ -217,6 +233,8 @@ public class GameObject {
 	public String getObjIDString(){
 		return objIDString;
 	}
+	
+
 	
 	
 }

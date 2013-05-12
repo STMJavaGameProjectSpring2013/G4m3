@@ -22,7 +22,13 @@ public class DeachoObject extends GameObject implements ActionListener{
         r=g=b=0;
         sidelength=65;
         Timer t = new Timer(1,this);
-        this.setBBoxExtras(0,0,2*sidelength-11, sidelength+1);
+        //this.setBBoxExtras(0,0,2*sidelength-11, sidelength+1);  ---not using this anymore
+        this.setNewBBox(0, 0, 2*sidelength-10, sidelength);
+        
+        //Added by Mr.Roche You need this to bounce on sides correctly...
+        objW = 2*sidelength-10;
+        objH = sidelength;
+        
         t.start();
         c=yolocounter;
     }
@@ -33,6 +39,10 @@ public class DeachoObject extends GameObject implements ActionListener{
         gelf.drawString("#SWAGBOT2013", xLoc+15, yLoc+sidelength/2);
         gelf.setColor(Color.BLACK);
         
+        
+        //By Mr Roche for testing...
+        gelf.setColor(Color.MAGENTA);
+        gelf.fillOval(xLoc-2,  yLoc-2, 5,5);
     }
 
     public void actionPerformed(ActionEvent yolo) {

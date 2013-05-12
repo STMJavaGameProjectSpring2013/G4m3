@@ -19,10 +19,10 @@ public class MrRocheObject extends GameObject {
 
 	public MrRocheObject(String typeName, int x, int y) {
 		super(typeName, x, y);
-		System.out.println("Hi from the top of the constructor MrRocheObject");
+		//System.out.println("Hi from the top of the constructor MrRocheObject");
 		
 		ClassLoader cl = Thread.currentThread().getContextClassLoader();
-		System.out.println("Hi the class loader C1 is good");
+		//System.out.println("Hi the class loader C1 is good");
 		InputStream input1 = ClassLoader.getSystemResourceAsStream("MrRocheImage1A.png");
 		InputStream input2 = cl.getSystemResourceAsStream("MrRocheImage2A.png");
 		InputStream input3 = ClassLoader.getSystemResourceAsStream("MrRocheImage8A.png");
@@ -39,7 +39,8 @@ public class MrRocheObject extends GameObject {
 			objH = mainImage.getHeight(null);
 			pictureLoaded = true;
 			
-			this.setBBoxExtras(0, 25, objW, (int)(objH/2)+5);
+			//this.setBBoxExtras(0, 25, objW, (int)(objH/2)+5);
+			this.setNewBBox(0, 25, objW, (int)(objH/2)+5);
 			
 			
 		} catch(IOException e){
@@ -55,22 +56,27 @@ public class MrRocheObject extends GameObject {
 		if(pictureLoaded){
 			
 			if(getAngle() >29.0 && getAngle() < 61.0){
-				g.drawImage(image45, xLoc-(int)(objW/2), yLoc-(int)(objH/2), objW, objH, null);
+				g.drawImage(image45, xLoc, yLoc, objW, objH, null);
 			} else {
 				if(getAngle() >119.0 && getAngle() < 151.0){
-					g.drawImage(image135, xLoc-(int)(objW/2), yLoc-(int)(objH/2), objW, objH, null);
+					g.drawImage(image135, xLoc, yLoc, objW, objH, null);
 				} else {
-					g.drawImage(mainImage, xLoc-(int)(objW/2), yLoc-(int)(objH/2), objW, objH, null);
+					g.drawImage(mainImage, xLoc, yLoc, objW, objH, null);
 				}
 				
 			}
 			
+			//This Draws the Bounding Box
 			g.setColor(Color.RED);
-			g.drawRect(xLoc-(int)(objW/2)+bBoxExtraX, yLoc-(int)(objH/2)+bBoxExtraY,bBoxW, bBoxH);
+			g.drawRect(xLoc+this.newBBoxX, yLoc+this.newBBoxY,this.newBBoxW, this.newBBoxH);
 			
 			g.setColor(Color.WHITE);
 			//g.drawString(("Mr.Roche "+whichMrRoche),  xLoc -(int)(objW/4) , yLoc+(int)(objH/2));
-			g.drawString(this.getObjIDString(),  xLoc -(int)(objW/2) , yLoc+(int)(objH/2));
+			g.drawString(this.getObjIDString(),  xLoc  , yLoc+(int)(objH/2));
+			
+			//Draw the xLoc, yLoc
+			g.setColor(Color.MAGENTA);
+			g.fillOval(xLoc, yLoc, 5, 5);
 			
 		} else {
 		g.setColor(objColor);
@@ -105,6 +111,50 @@ public class MrRocheObject extends GameObject {
 			}
 		}
 		
+	}
+	
+	
+	//Special CheckBounds for white area of the Mr.Roche 
+public void checkBounds(int panelWidth, int panelHeight){
+		
+		int rightFrame = 15;
+		int bottomFrame = 30;
+		int MrRochePicBottom = 25;
+		
+		
+		//Check Left
+		if(getDX() < 0){
+			if(getXLoc() < 0){
+				setXLoc(0);
+				setDX(getDX()*-1);
+			}
+		}
+		
+		//Check right
+		if(getDX() > 0){
+			if((getXLoc()+getObjWidth()) > panelWidth){
+				setXLoc(panelWidth-getObjWidth());
+				setDX(getDX()*-1);
+			}
+		}
+		
+		//Check top
+		if(getDY() < 0){
+			if(getYLoc() < 0){
+				setYLoc(0);
+				setDY(getDY()*-1);
+			}
+		}
+		
+		//Check bottom
+		if(getDY() > 0){
+			if(getYLoc()+(int)(getObjHeight()-MrRochePicBottom) > panelHeight-bottomFrame){
+				setYLoc(panelHeight-(getObjHeight()-MrRochePicBottom)-bottomFrame);
+				setDY(getDY()*-1);
+			}
+		}
+		
+	
 	}
 	
 

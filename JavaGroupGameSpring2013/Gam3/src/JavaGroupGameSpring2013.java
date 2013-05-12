@@ -12,7 +12,7 @@ public class JavaGroupGameSpring2013 {
 	//Instance variables
 	static JFrame f;
 	static GamePlayerPanel p;
-	static int fWidth = 900, fHeight=700;
+	static int fWidth = 900, fHeight=400;
 	public static void main(String[] args) {
 		
 		//Start of the game, build a frame
@@ -22,9 +22,9 @@ public class JavaGroupGameSpring2013 {
 		
 		p = new GamePlayerPanel(fWidth, fHeight, f);
 		f.add(p);
-		
+
 		f.setVisible(true);
-                f.setResizable(false);
+               //f.setResizable(false);
 				//Changed the window so game resizes with window... Mr. Roche.
 	}
 

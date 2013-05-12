@@ -1,0 +1,93 @@
+import java.awt.Color;
+import java.awt.Graphics;
+
+
+public class AlexvcObject extends GameObject{
+	
+	//This probably isnt the greatest programming here to 
+	//private int x = xLoc;
+	//private int y = yLoc;
+	//private int[] xList = {x-25, x+25, x, x-25, x+25};
+	//private int[] yList = {y-25, y-25, y, y+25, y+25};
+
+	//Re-Do to have xLoc, yLoc be in the upper right corner...
+	private int[] xList;
+	private int[] yList;
+	private int x;
+	private int y;
+	
+
+	public AlexvcObject(String shapeName, int w, int h){
+		
+		super(shapeName, w, h);
+		//You can now set up x, y here...might not be so necessary..
+		x = xLoc;
+		y = yLoc;
+		
+		xList[0] = xLoc ;
+		xList[1] = xLoc + 50;
+		xList[2] = xLoc+25;
+		xList[3] = xLoc;
+		xList[4] = xLoc+50;
+		
+		yList[0] = yLoc ;
+		yList[1] = yLoc+50;
+		yList[2] = yLoc+25;
+		yList[3] = yLoc;
+		yList[4] = yLoc+50;
+		
+		
+		
+		 objW = 50;
+		 objH = 50;
+		this.setBBoxExtras(0, -1, 50, 51);
+		this.setNewBBox(0, 0, objW, objH);
+		
+		
+	}
+	
+	public void drawObject(Graphics g){
+		
+		/* Re done to allow for xLoc, yLoc to be in upper right hand corner
+		xList[0] = xLoc -25;
+		xList[1] = xLoc +25;
+		xList[2] = xLoc;
+		xList[3] = xLoc -25;
+		xList[4] = xLoc +25;
+		
+		yList[0] = yLoc -25;
+		yList[1] = yLoc -25;
+		yList[2] = yLoc;
+		yList[3] = yLoc +25;
+		yList[4] = yLoc +25;
+		*/
+		
+		
+		xList[0] = xLoc ;
+		xList[1] = xLoc + 50;
+		xList[2] = xLoc+25;
+		xList[3] = xLoc;
+		xList[4] = xLoc+50;
+		
+		yList[0] = yLoc ;
+		yList[1] = yLoc+50;
+		yList[2] = yLoc+25;
+		yList[3] = yLoc;
+		yList[4] = yLoc+50;
+		
+		
+		g.setColor(Color.RED);
+		g.drawRect(xLoc-(int)(objW/2)+bBoxExtraX, yLoc-(int)(objH/2)+bBoxExtraY,bBoxW, bBoxH);
+		
+		
+		g.setColor(Color.BLUE);
+		g.fillPolygon(xList, yList, 5);
+		
+		
+		//Draw the xLoc, yLoc
+		g.setColor(Color.GREEN);
+		g.fillOval(xLoc-2, yLoc-2, 5, 5);
+		
+	}
+	
+}

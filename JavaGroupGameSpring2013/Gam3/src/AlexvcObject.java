@@ -4,27 +4,34 @@ import java.awt.Graphics;
 
 public class AlexvcObject extends GameObject{
 	
-	private int x = xLoc;
-	private int y = yLoc;
-	
-	private int[] xList = {x-25, x+25, x, x-25, x+25};
-	private int[] yList = {y-25, y-25, y, y+25, y+25};
+	//This probably isnt the greatest programming here to 
+	//private int x = xLoc;
+	//private int y = yLoc;
+	//private int[] xList = {x-25, x+25, x, x-25, x+25};
+	//private int[] yList = {y-25, y-25, y, y+25, y+25};
+
+	//Re-Do to have xLoc, yLoc be in the upper right corner...
+	private int[] xList = new int[5];
+	private int[] yList = new int[5];
 
 
 	public AlexvcObject(String shapeName, int w, int h){
 		
 		super(shapeName, w, h);
+	
 		
-		this.setBBoxExtras(0, -1, 50, 51);
-		 objW = 50;
-		 objH = 50;
+		
+		objW = 50;
+		objH = 50;
+		//this.setBBoxExtras(0, -1, 50, 51);  -- not using this anymore
+		this.setNewBBox(0, 0, objW, objH);
 		
 		
 	}
 	
 	public void drawObject(Graphics g){
 		
-		
+		/* Re done to allow for xLoc, yLoc to be in upper right hand corner
 		xList[0] = xLoc -25;
 		xList[1] = xLoc +25;
 		xList[2] = xLoc;
@@ -36,13 +43,34 @@ public class AlexvcObject extends GameObject{
 		yList[2] = yLoc;
 		yList[3] = yLoc +25;
 		yList[4] = yLoc +25;
+		*/
 		
-		g.setColor(Color.RED);
-		g.drawRect(xLoc-(int)(objW/2)+bBoxExtraX, yLoc-(int)(objH/2)+bBoxExtraY,bBoxW, bBoxH);
+		//set hourglass points where xLoc yLoc is the upper right hand corner
+		xList[0] = xLoc;
+		xList[1] = xLoc+50;
+		xList[2] = xLoc+25;
+		xList[3] = xLoc;
+		xList[4] = xLoc+50;
 		
+		yList[0] = yLoc;
+		yList[1] = yLoc;
+		yList[2] = yLoc+25;
+		yList[3] = yLoc+50;
+		yList[4] = yLoc+50;
 		
+		//Draw the object
 		g.setColor(Color.BLUE);
 		g.fillPolygon(xList, yList, 5);
+		
+		//Draw the bounding box
+		g.setColor(Color.RED);
+		//g.drawRect(xLoc-(int)(objW/2)+bBoxExtraX, yLoc-(int)(objH/2)+bBoxExtraY,bBoxW, bBoxH);
+		g.drawRect(xLoc+this.newBBoxX, yLoc+this.newBBoxY, this.newBBoxW, this.newBBoxW);
+		
+		
+		//Draw the xLoc, yLoc
+		g.setColor(Color.MAGENTA);
+		g.fillOval(xLoc-2, yLoc-2, 5, 5);
 		
 	}
 	
