@@ -42,42 +42,49 @@ public class GamePlayerPanel extends JPanel implements ActionListener {
 		
 		MrRocheObject mrRocheObj1;
 		mrRocheObj1 = new MrRocheObject("Mr. Roche", (int)(w/2), (int)(h/2));
-		mrRocheObj1.setDX((Math.random()*9)+.5);
-		mrRocheObj1.setDY((Math.random()*9)+.5);
+		//mrRocheObj1.setDY((Math.random()*7)+.5);
+		mrRocheObj1.setYLoc(30);
+		mrRocheObj1.setXLoc((int)(Math.random()*700) +100);
+		mrRocheObj1.setDX(20);
+/*
 		if((int)(Math.random()*100)+1 <50){
 			mrRocheObj1.setDX(mrRocheObj1.getDX()*-1);
 		}
-		if((int)(Math.random()*100)+1 <50){
-			mrRocheObj1.setDY(mrRocheObj1.getDX()*-1);
-		}
-		
+*/		
                 
 		
         DeachoObject decholol;
         decholol=new DeachoObject("EachoObj", (int) w/4,(int)h/6,((int) Math.random()*3));
-        decholol.setDY(1);
+       // decholol.setDY(1);
+        decholol.setYLoc(30);
+        decholol.setXLoc(150);
         decholol.setDX(5);
        // decholol.setDX(5);
         //decholol.setDY(5);
  
                 
         //Alex VC Class Objects
+       /* 
         AlexvcObject alexvcObj;
         alexvcObj = new AlexvcObject("Alex", (int) w/2, (int) h/2);
         alexvcObj.setDX(2);
         alexvcObj.setDY(2);
-       
+       */ 
         
         //Ethan objects
+        /*
          EthanObject horrorshow;
          horrorshow = new EthanObject("Ethan", (int) w/2, (int) h/2);
          horrorshow.setDX(-5);
          horrorshow.setDY(2);
+         */ 
+                
+                
 		
 		allGameObjects.add(mrRocheObj1);
 		allGameObjects.add(decholol);
-		allGameObjects.add(alexvcObj);
-        allGameObjects.add(horrorshow);//Ethan's Object
+		//allGameObjects.add(alexvcObj);
+        //allGameObjects.add(horrorshow);//Ethan's Object
 		
        
 		t= new Timer(20, this);

@@ -42,42 +42,44 @@ public class GamePlayerPanel extends JPanel implements ActionListener {
 		
 		MrRocheObject mrRocheObj1;
 		mrRocheObj1 = new MrRocheObject("Mr. Roche", (int)(w/2), (int)(h/2));
-		mrRocheObj1.setDX(0.25);
-		mrRocheObj1.setDY(4.0);
+		mrRocheObj1.setDX((Math.random()*7)+.5);
+		mrRocheObj1.setYLoc(30);
+		//mrRocheObj1.setDY((Math.random()*7)+.5);
                 
 		
         DeachoObject decholol;
         decholol=new DeachoObject("EachoObj", (int) w/4,(int)h/6,((int) Math.random()*3));
-        decholol.setDX(1);
-        decholol.setDY(1);
-        decholol.setDX(5);
-        decholol.setDY(5);
+        decholol.setDX(-5);
+        decholol.setYLoc(30);
+       // decholol.setDY(1);
+       // decholol.setDX(5);
+        //decholol.setDY(5);
  
                 
-        //There is no Alex VC Class That needs to be added.
+        //Alex VC Class Objects
+        /*
         AlexvcObject alexvcObj;
         alexvcObj = new AlexvcObject("Alex", (int) w/2, (int) h/2);
         alexvcObj.setDX(2);
         alexvcObj.setDY(2);
-                
-                
-                /* EthanObject horrorshow;
-                horrorshow = new EthanObject("Ethan", (int) w/2, (int) h/2);
-                horrorshow.setDX(-5);
-                horrorshow.setDY(2);
-                */
+         */
+        
+        //Ethan objects
+        /*
+         EthanObject horrorshow;
+         horrorshow = new EthanObject("Ethan", (int) w/2, (int) h/2);
+         horrorshow.setDX(-5);
+         horrorshow.setDY(2);
+          */ 
                 
                 
 		
 		allGameObjects.add(mrRocheObj1);
 		allGameObjects.add(decholol);
-		allGameObjects.add(alexvcObj);
-             //   allGameObjects.add(horrorshow);//Ethan's Object
+		//allGameObjects.add(alexvcObj);
+       // allGameObjects.add(horrorshow);//Ethan's Object
 		
-        // decholol=new DeachoObject(200,200);
-		//decholol.setDX(9.0);
-        //  decholol.setDY(6.0);
-                
+       
 		t= new Timer(20, this);
 		t.start();
 	}
@@ -108,20 +110,20 @@ public void drawAllGameObjects(Graphics g){
 		
 		int listLength = allGameObjects.size();
 		for(int i = 0; i < listLength; ++i){
-                    if(allGameObjects.get(i) instanceof MrRocheObject){
-			allGameObjects.get(i).drawObject(g);
-                    }
-                    if(allGameObjects.get(i) instanceof DeachoObject){
-			allGameObjects.get(i).drawObject(g);
-                    }
-                    if(allGameObjects.get(i) instanceof AlexvcObject){
+                if(allGameObjects.get(i) instanceof MrRocheObject){
+                		allGameObjects.get(i).drawObject(g);
+                }
+                if(allGameObjects.get(i) instanceof DeachoObject){
+                		allGameObjects.get(i).drawObject(g);
+                }
+                if(allGameObjects.get(i) instanceof AlexvcObject){
                     	//System.out.println("Trying to draw an alex");
                     	//System.out.println("His dx dy are: " + allGameObjects.get(i).getDX() + ", " + allGameObjects.get(i).getDY());
                         allGameObjects.get(i).drawObject(g);
-                    }
-                    if(allGameObjects.get(i) instanceof EthanObject){
-			allGameObjects.get(i).drawObject(g);
-                    }
+                 }
+                 if(allGameObjects.get(i) instanceof EthanObject){
+                	 	allGameObjects.get(i).drawObject(g);
+                 }
 		}
 	}
 	
@@ -137,41 +139,10 @@ public void drawAllGameObjects(Graphics g){
 		repaint();	
 	}
 	
-	/* we are migrating from just mR Roche objects....
-	public void moveMrRocheObjects(){
-		int listLength = allMrRocheObjects.size();
-		ArrayList<Integer> casualties = new ArrayList<Integer>();
-		for(int i = 0; i < listLength; ++i){
-			allMrRocheObjects.get(i).moveObject();
-			allMrRocheObjects.get(i).checkBounds(panelW,panelH);
-			allMrRocheObjects.get(i).setCrazyDX();
-			if(allMrRocheObjects.get(i).checkSpawnTime()==true){		
-				MrRocheObject mrRObj1;
-				mrRObj1 = new MrRocheObject(panelW,panelH);
-				mrRObj1.setDX(Math.random()+.01);
-				mrRObj1.setDY(Math.random()*10);
-				allMrRocheObjects.add(mrRObj1);
-			}
-			
-			if(allMrRocheObjects.get(i).timeToKickIt() == true){
-				System.out.println("it is time to Kick It for arrayList slot: " + i);
-				casualties.add(new Integer(i));
-				allMrRocheObjects.get(i).setDX(0.0);
-				allMrRocheObjects.get(i).setDY(0.0);
-				
-			}
-		}
-		
-		//Clean up list
-		for(int i = 0; i<casualties.size(); ++i){
-			allMrRocheObjects.remove(casualties.get(i).intValue());
-		}
-		
-	}
 	
-	*/
-	
-	
+	// This is a method that allows moves any GAME OBJECT, so you can be
+	// an MrRocheObj, EachoObj, AlexVonCampeObj, EthanObj, dolceObj or TempelObj
+	// and you can still get moved here.
 	
 	public void moveAllObjects(){
 		int listLength = allGameObjects.size();
@@ -182,6 +153,7 @@ public void drawAllGameObjects(Graphics g){
 			checkCollision(allGameObjects.get(i));
 			
 			//Now do stuff for Spawning....
+		/*	
 			if(allGameObjects.get(i).checkSpawnTime()==true){
 				if(allGameObjects.get(i) instanceof MrRocheObject){
 					doMrRocheSpawn();
@@ -189,45 +161,42 @@ public void drawAllGameObjects(Graphics g){
 				if(allGameObjects.get(i) instanceof AlexvcObject){
 					doAlexvcSpawn();
 				}
-                                if(allGameObjects.get(i) instanceof DeachoObject){
-                                        doswagbotSpawn();
-                                }
+                if(allGameObjects.get(i) instanceof DeachoObject){
+                   doswagbotSpawn();
+                }
 			}
-			
-			
+		*/	
+		/*
 			//And do stuff for Logans Runs Timed obsolescence....
 			if(allGameObjects.get(i).timeToKickIt() == true){
-				System.out.println("it is time to Kick It for arrayList slot: " + i);
+				//System.out.println("it is time to Kick It for arrayList slot: " + i);
 				casualties.add(new Integer(i));
 				allGameObjects.get(i).setDX(0.0);
 				allGameObjects.get(i).setDY(0.0);
 				
 			}
+		*/	
 			
-			//for MrRocheObjects
+			//for MrRocheObjects  -- do not touch
+			/*
 			if(allGameObjects.get(i) instanceof MrRocheObject){
 				((MrRocheObject) allGameObjects.get(i)).setCrazyDX();
 			}	
+			*/
 		}  // END OF MAIN LOOP TO RUN THROUGH ALL OBJECTS
 		
 
-		//Clean up list
+		//Clean up list--When its time to kick it you leave the list...
+		
+		/*
 		for(int i = 0; i<casualties.size(); ++i){
 			allGameObjects.remove(casualties.get(i).intValue());
 		}
-		
+		*/
+	
 	}
 	
-	public void checkBounds(){
-
-		/***** I HAVE MIGRATED THIS FUNCTIONALITY TO GAME OBJECT
-		*NOW EACH OBJECT JUST CHECKS ITS OWN BOUNDS.  Instead of
-		*calling this method, you just call yourObject.checkBounds( panelW, panelH)
-		--Mr. Roche
-		*/
-		
-		
-	}
+	
 	
 	
 	public void doMrRocheSpawn(){
@@ -248,16 +217,14 @@ public void drawAllGameObjects(Graphics g){
 		allGameObjects.add(alexvcObj2);
 		
 	}
-        public void doswagbotSpawn(){
-            System.out.println("#SUCHSPAWN");
-                DeachoObject swagbot2014;
-                swagbot2014 = new DeachoObject("#SwagYolo",panelW,panelH,((int) Math.random()*3));
-                swagbot2014.setDX(2);
-                swagbot2014.setDY(20);
-                allGameObjects.add(swagbot2014);
-            
-            
-        }
+     public void doswagbotSpawn(){
+         System.out.println("#SUCHSPAWN");
+         DeachoObject swagbot2014;
+         swagbot2014 = new DeachoObject("#SwagYolo",panelW,panelH,((int) Math.random()*3));
+         swagbot2014.setDX(2);
+         swagbot2014.setDY(20);
+         allGameObjects.add(swagbot2014);       
+    }
 	
 	
 	public int getPanelW(){
@@ -279,7 +246,7 @@ public void drawAllGameObjects(Graphics g){
 			if(testObject != otherObject){
 				if(isACollision(testObject, otherObject) ==true){
 					//do something
-					System.out.println("Collision between " + testObject.getObjIDString() + " and " + otherObject.getObjIDString());
+					//System.out.println("Collision between " + testObject.getObjIDString() + " and " + otherObject.getObjIDString());
 					bounceIt(testObject, otherObject);
 				}
 			}
@@ -294,14 +261,18 @@ public void drawAllGameObjects(Graphics g){
 	public boolean isACollision(GameObject testObject, GameObject otherObject) {
 		boolean whatToReturn = true;
 		
-		if ((otherObject.getBBoxX()+otherObject.getBBoxW()) < testObject.getBBoxX()) {
+		int otherX, otherY, otherW, otherH;
+		int testX, testY, testW, testH;
+
+		
+		if ((otherObject.getBBoxXLoc()+otherObject.getBBoxW()) < testObject.getBBoxXLoc()) {
 			whatToReturn = false;
-		} else if (otherObject.getBBoxX() > testObject.getBBoxX()+testObject.getBBoxW()) {
+		} else if (otherObject.getBBoxXLoc() > testObject.getBBoxXLoc()+testObject.getBBoxW()) {
 			whatToReturn = false;
 	
-		} else if ((otherObject.getBBoxY()+otherObject.getBBoxH()) < testObject.getBBoxY()) {
+		} else if ((otherObject.getBBoxYLoc()+otherObject.getBBoxH()) < testObject.getBBoxYLoc()) {
 			whatToReturn = false;
-		} else if (otherObject.getBBoxY() > (testObject.getBBoxY()+testObject.getBBoxH())) {
+		} else if (otherObject.getBBoxYLoc() > (testObject.getBBoxYLoc()+testObject.getBBoxH())) {
 			whatToReturn = false;
 		} 
 
@@ -313,17 +284,28 @@ public void drawAllGameObjects(Graphics g){
 	
 	public void bounceIt(GameObject testObject, GameObject otherObject){
 		 int difference;
-		if((testObject.getBBoxX()+testObject.getBBoxW())>= otherObject.getBBoxX()){
-			difference =(testObject.getBBoxX()+ testObject.getBBoxW()) - otherObject.getBBoxX();
-			testObject.setXLoc(testObject.getXLoc()-(int)(difference/2)-1);
-			otherObject.setXLoc(otherObject.getXLoc()+ (int)(difference/2)+1);
-		} else if((otherObject.getBBoxX()+otherObject.getBBoxW())>= testObject.getBBoxX()){
-				difference = (otherObject.getBBoxX()+otherObject.getBBoxW()) - testObject.getBBoxX();
-				otherObject.setXLoc(otherObject.getXLoc()-(int)(difference/2)-1);
-				testObject.setXLoc(testObject.getXLoc()+ (int)(difference/2)+1);
-			
-		}
-		
+		 
+		 if(testObject.getDX()>= 0.0  && otherObject.getDX() <= 0.0){
+				if((testObject.getBBoxXLoc()+testObject.getBBoxW())>= otherObject.getBBoxXLoc()){
+					difference =(testObject.getBBoxXLoc()+ testObject.getBBoxW()) - otherObject.getBBoxXLoc();
+					testObject.setXLoc(testObject.getXLoc()-(int)(difference/2)-1);
+					otherObject.setXLoc(otherObject.getXLoc()+ (int)(difference/2));
+					
+				}
+				
+		 }	
+				
+		 if(testObject.getDX() <= 0.0 && otherObject.getDX() >= 0.0){
+		 		if(testObject.getBBoxXLoc()<= (otherObject.getBBoxXLoc()+otherObject.getBBoxW())){
+					difference =(otherObject.getBBoxXLoc()+ otherObject.getBBoxW()) - testObject.getBBoxXLoc();
+					testObject.setXLoc(testObject.getXLoc()+(int)(difference/2)-1);
+					otherObject.setXLoc(otherObject.getXLoc()- (int)(difference/2));
+					
+				}
+		 }
+		 
+	
+		 
 		//switch dx and dy
 		double tempX = testObject.getDX();
 		testObject.setDX(otherObject.getDX());
@@ -332,6 +314,9 @@ public void drawAllGameObjects(Graphics g){
 		double tempY = testObject.getDY();
 		testObject.setDY(otherObject.getDY());
 		otherObject.setDY(tempY);
+		
+		//testObject.moveObject();
+		//otherObject.moveObject();
 		
 		repaint();
 	}
