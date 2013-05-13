@@ -16,8 +16,6 @@ public class EthanObject extends GameObject {
 		objW = diameter;
 		objH = diameter;
 		this.setNewBBox(0, 0, objW, objH);
-		
-		
 	}
 	
 	public void drawObject(Graphics g){
@@ -60,6 +58,4 @@ public class EthanObject extends GameObject {
 		}
 		
 	}
-	
-
 }

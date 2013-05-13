@@ -69,15 +69,15 @@ public class GamePlayerPanel extends JPanel implements ActionListener {
        
         
         //Ethan objects
-         EthanObject horrorshow;
-         horrorshow = new EthanObject("Ethan", (int) w/2, (int) h/2);
-         horrorshow.setDX(-5);
-         horrorshow.setDY(2);
+         EthanObject ethObj;
+         ethObj = new EthanObject("Ethan", (int) w/2, (int) h/2);
+         ethObj.setDX(-5);
+         ethObj.setDY(2);
 		
 		allGameObjects.add(mrRocheObj1);
 		allGameObjects.add(decholol);
 		allGameObjects.add(alexvcObj);
-        allGameObjects.add(horrorshow);//Ethan's Object
+        allGameObjects.add(ethObj);//Ethan's Object
 		
        
 		t= new Timer(20, this);
@@ -164,6 +164,9 @@ public void drawAllGameObjects(Graphics g){
                 if(allGameObjects.get(i) instanceof DeachoObject){
                    doswagbotSpawn();
                 }
+                if(allGameObjects.get(i) instanceof DeachoObject){
+                    doEthanSpawn();
+                 }
 			}
 		
 		
@@ -208,14 +211,12 @@ public void drawAllGameObjects(Graphics g){
 	}
 	
 	public void doAlexvcSpawn(){
-		
 		//System.out.println("SPAWN");
 		AlexvcObject alexvcObj2;
 		alexvcObj2 = new AlexvcObject("Alex", panelW, panelH);
 		alexvcObj2.setDX(2);
 		alexvcObj2.setDY(2);
 		allGameObjects.add(alexvcObj2);
-		
 	}
      public void doswagbotSpawn(){
          System.out.println("#SUCHSPAWN");
@@ -225,7 +226,13 @@ public void drawAllGameObjects(Graphics g){
          swagbot2014.setDY(20);
          allGameObjects.add(swagbot2014);       
     }
-	
+	public void doEthanSpawn(){
+		EthanObject ethanObj;
+		ethanObj = new EthanObject("Ethan", panelW, panelH);
+		ethanObj.setDX(Math.random()+.01);
+		ethanObj.setDY(Math.random()*10);
+		allGameObjects.add(ethanObj);
+	}
 	
 	public int getPanelW(){
 		return panelW;
