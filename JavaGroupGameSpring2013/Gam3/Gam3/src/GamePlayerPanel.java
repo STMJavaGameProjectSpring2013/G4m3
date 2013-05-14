@@ -131,6 +131,9 @@ public void drawAllGameObjects(Graphics g){
                  if(allGameObjects.get(i) instanceof EthanObject){
                 	 	allGameObjects.get(i).drawObject(g);
                  }
+                 if(allGameObjects.get(i) instanceof PaulTempelExperientialObject){
+             	 	allGameObjects.get(i).drawObject(g);
+              }
 		}
 	}
 	

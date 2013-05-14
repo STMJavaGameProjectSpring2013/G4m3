@@ -21,7 +21,7 @@ public class PaulTempelExperientialObject extends GameObject{
 		
 		changeDX(dxRate);
 		if(getDX() > 0){
-			if(getDX() > 100){
+			if(getDX() > 100){n
 				dxRate*=-1;
 			}
 		}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="30" version="2.0">
+<workbench progressCount="29" version="2.0">
 <workbenchAdvisor/>
 <window height="738" width="1024" x="132" y="0">
 <fastViewData fastViewLocation="1024"/>
@@ -35,6 +35,7 @@
 <part id="3"/>
 <part id="2"/>
 <part id="5"/>
+<part id="6"/>
 </presentation>
 </folder>
 </info>
@@ -61,7 +62,11 @@
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GamePlayerPanel.java" partName="GamePlayerPanel.java" path="C:/Documents and Settings/PaulTempel/Desktop/GitHub/G4m3/JavaGroupGameSpring2013/Gam3/Gam3/src/GamePlayerPanel.java" title="GamePlayerPanel.java" tooltip="Gam3/src/GamePlayerPanel.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gam3/src/GamePlayerPanel.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6416" selectionTopPixel="3737"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="554" selectionTopPixel="35"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PaulTempelExperientialObject.java" partName="PaulTempelExperientialObject.java" path="C:/Documents and Settings/PaulTempel/Desktop/GitHub/G4m3/JavaGroupGameSpring2013/Gam3/Gam3/src/PaulTempelExperientialObject.java" title="PaulTempelExperientialObject.java" tooltip="Gam3/src/PaulTempelExperientialObject.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Gam3/src/PaulTempelExperientialObject.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="531" selectionTopPixel="51"/>
 </editor>
 </editors>
 <views>
@@ -69,7 +74,6 @@
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
 <category IMemento.internal.id="Errors"/>
-<category IMemento.internal.id="Warnings"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="75" org.eclipse.ui.ide.markerType="75" org.eclipse.ui.ide.pathField="100" org.eclipse.ui.ide.resourceField="75" org.eclipse.ui.ide.severityAndDescriptionField="250"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -271,19 +275,9 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Gam3/src/EthanObject.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Gam3/src/GameObject.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Gam3/src/GamePlayerPanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Gam3/src/paulTempelExperientialObject.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Gam3/src/PaulTempelExperientialObject.java"/>
 </editors>
-<item historyLabel="PaulTempelExperientialObject.java" index="0">
-<position info="not_deleted" x="265" y="0"/>
-</item>
-<item historyLabel="GamePlayerPanel.java" index="4">
-<position info="not_deleted" x="2188" y="0"/>
-</item>
-<item historyLabel="PaulTempelExperientialObject.java" index="0">
-<position info="not_deleted" x="265" y="0"/>
-</item>
-<item historyLabel="GamePlayerPanel.java" index="4">
-<position info="not_deleted" x="2188" y="0"/>
-</item>
 <item historyLabel="MrRocheObject.java" index="1">
 <position info="not_deleted" x="926" y="0"/>
 </item>
@@ -419,8 +413,20 @@
 <item historyLabel="GamePlayerPanel.java" index="4">
 <position info="not_deleted" x="2391" y="0"/>
 </item>
-<item active="true" historyLabel="GamePlayerPanel.java" index="4">
+<item historyLabel="GamePlayerPanel.java" index="4">
 <position/>
+</item>
+<item historyLabel="paulTempelExperientialObject.java" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="paulTempelExperientialObject.java" index="5">
+<position info="not_deleted" x="68" y="28"/>
+</item>
+<item historyLabel="PaulTempelExperientialObject.java" index="6">
+<position info="not_deleted" x="531" y="0"/>
+</item>
+<item active="true" historyLabel="GamePlayerPanel.java" index="4">
+<position info="not_deleted" x="6610" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -440,6 +446,9 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="paulTempelExperientialObject.java" tooltip="Gam3/src/paulTempelExperientialObject.java">
+<persistable path="/Gam3/src/paulTempelExperientialObject.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GamePlayerPanel.java" tooltip="Gam3/src/GamePlayerPanel.java">
 <persistable path="/Gam3/src/GamePlayerPanel.java"/>
 </file>
@@ -454,9 +463,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MrRocheObject.java" tooltip="Gam3/src/MrRocheObject.java">
 <persistable path="/Gam3/src/MrRocheObject.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="paulTempelExperientialObject.java" tooltip="Gam3/src/paulTempelExperientialObject.java">
-<persistable path="/Gam3/src/paulTempelExperientialObject.java"/>
 </file>
 </mruList>
 </workbench>
