@@ -1,0 +1,144 @@
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.Timer;
+
+
+public class AlexvcObject extends GameObject{
+	
+	//This probably isnt the greatest programming here to 
+	//private int x = xLoc;
+	//private int y = yLoc;
+	//private int[] xList = {x-25, x+25, x, x-25, x+25};
+	//private int[] yList = {y-25, y-25, y, y+25, y+25};
+
+	//Re-Do to have xLoc, yLoc be in the upper right corner...
+	private int[] xList = new int[5];
+	private int[] yList = new int[5];
+	
+	//length from middle to any point
+	int L;
+	Timer t;
+	
+	int newAngle;
+	double newAngleRadians;
+
+
+	public AlexvcObject(String shapeName, int w, int h){
+		
+		super(shapeName, w, h);
+	
+		
+		
+		objW = 50;
+		objH = 50;
+		
+		L = (int)(Math.sqrt(1250));
+		//this.setBBoxExtras(0, -1, 50, 51);  -- not using this anymore
+		this.setNewBBox(0, 0, objW, objH);
+		
+		
+	}
+	
+	public void drawObject(Graphics g){
+		
+		/* Re done to allow for xLoc, yLoc to be in upper right hand corner
+		xList[0] = xLoc -25;
+		xList[1] = xLoc +25;
+		xList[2] = xLoc;
+		xList[3] = xLoc -25;
+		xList[4] = xLoc +25;
+		
+		yList[0] = yLoc -25;
+		yList[1] = yLoc -25;
+		yList[2] = yLoc;
+		yList[3] = yLoc +25;
+		yList[4] = yLoc +25;
+		*/
+		
+		int pivotX, pivotY;
+		double startAngle;
+		
+		
+		
+		
+		pivotX = xLoc+25;
+		pivotY = yLoc+25;
+		
+		//set hourglass points where xLoc yLoc is the upper right hand corner
+		/*xList[0] = xLoc;
+		xList[1] = xLoc+50;
+		xList[2] = xLoc+25;
+		xList[3] = xLoc;
+		xList[4] = xLoc+50;
+		
+		yList[0] = yLoc;
+		yList[1] = yLoc;
+		yList[2] = yLoc+25;
+		yList[3] = yLoc+50;
+		yList[4] = yLoc+50;*/
+		
+		/*xList[0] = pivotX - (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		xList[1] = pivotX + (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		xList[2] = pivotX;
+		xList[3] = pivotX - (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		xList[4] = pivotX + (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		
+		yList[0] = pivotY - (int)(L*(Math.sin(Math.PI/4)));
+		yList[1] = pivotY - (int)(L*(Math.sin(Math.PI/4)));
+		yList[2] = pivotY;
+		yList[3] = pivotY + (int)(L*(Math.sin(Math.PI/4)));
+		yList[4] = pivotY + (int)(L*(Math.sin(Math.PI/4)));*/
+		
+		xList[0] = pivotX + (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		xList[1] = pivotX - (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		xList[2] = pivotX;
+		xList[3] = pivotX + (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		xList[4] = pivotX - (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		
+		yList[0] = pivotY - (int)(L*(Math.sin(Math.PI/4)));
+		yList[1] = pivotY - (int)(L*(Math.sin(Math.PI/4)));
+		yList[2] = pivotY;
+		yList[3] = pivotY + (int)(L*(Math.sin(Math.PI/4)));
+		yList[4] = pivotY + (int)(L*(Math.sin(Math.PI/4)));
+		
+		System.out.println("y2 = " + yList[2]);
+		//System.out.println("y3 = " + yList[3]);
+		
+		setNewAngle();
+		
+		newAngleRadians = Math.toRadians(newAngle);
+		
+		
+		
+		startAngle = (Math.random())*(2*Math.PI);
+				
+		//Draw the object
+		g.setColor(Color.BLUE);
+		g.fillPolygon(xList, yList, 5);
+		
+		//Draw the bounding box
+		g.setColor(Color.RED);
+		//g.drawRect(xLoc-(int)(objW/2)+bBoxExtraX, yLoc-(int)(objH/2)+bBoxExtraY,bBoxW, bBoxH);
+		g.drawRect(xLoc+this.newBBoxX, yLoc+this.newBBoxY, this.newBBoxW, this.newBBoxW);
+		
+		
+		//Draw the xLoc, yLoc
+		g.setColor(Color.MAGENTA);
+		g.fillOval(xLoc-2, yLoc-2, 5, 5);
+		
+	}
+	
+	public void setNewAngle() {
+		
+		++newAngle;
+		if(newAngle > 359){
+			newAngle = 0;
+			
+			
+		}
+		
+	}
+	
+	
+}
