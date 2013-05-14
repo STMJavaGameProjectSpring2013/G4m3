@@ -233,6 +233,7 @@ public void drawAllGameObjects(Graphics g){
          allGameObjects.add(swagbot2014);       
     }
 	
+	
 	public int getPanelW(){
 		return panelW;
 	}

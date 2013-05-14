@@ -232,6 +232,10 @@ public void drawAllGameObjects(Graphics g){
          swagbot2014.setDY(20);
          allGameObjects.add(swagbot2014);       
     }
+     public void doOpObjectSpawn(){
+    	 PaulTempel
+     }
+	
 	
 	public int getPanelW(){
 		return panelW;

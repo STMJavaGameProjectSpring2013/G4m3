@@ -7,12 +7,12 @@ public class PaulTempelExperientialObject extends GameObject{
 	int width = 25;
 	int height = 25;
 	
-	public PaulTempelExperientialObject(String type, int x, int y){
-		super(type, x, y);
+	public opObject(String typeName, int x, int y){
+		super(typeName, x, y);
 		
 		this.setNewBBox(0, 50, width, height);
 	}
-	public void drawOpObject(Graphics elf){
+	public void drawOPObject(Graphics elf){
 		elf.setColor(Color.RED);
 		elf.drawRect(0, 50, width, height);
 	}

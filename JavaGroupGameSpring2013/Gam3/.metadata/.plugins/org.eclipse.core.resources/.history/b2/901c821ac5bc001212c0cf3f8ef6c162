@@ -77,14 +77,11 @@ public class GamePlayerPanel extends JPanel implements ActionListener {
         //Paul Object
         PaulTempelExperientialObject opObject;
         opObject = new PaulTempelExperientialObject("Paul", (int) w/2, (int) h/2);
-        opObject.setDX(4);
-        opObject.setDY(-3);
 		
 		allGameObjects.add(mrRocheObj1);
 		allGameObjects.add(decholol);
 		allGameObjects.add(alexvcObj);
         allGameObjects.add(horrorshow);//Ethan's Object
-        allGameObjects.add(opObject);
 		
        
 		t= new Timer(20, this);
@@ -232,6 +229,7 @@ public void drawAllGameObjects(Graphics g){
          swagbot2014.setDY(20);
          allGameObjects.add(swagbot2014);       
     }
+	
 	
 	public int getPanelW(){
 		return panelW;

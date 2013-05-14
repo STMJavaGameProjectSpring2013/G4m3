@@ -1,0 +1,35 @@
+import java.awt.Color;
+import java.awt.Graphics;
+
+
+public class PaulTempelExperientialObject extends GameObject{
+	
+	int width = 25;
+	int height = 25;
+	
+	public opObject(String typeName, int x, int y){
+		super(typeName, x, y);
+		
+		this.setNewBBox(0, 50, width, height);
+	}
+	public void drawOPObject(Graphics elf){
+		elf.setColor(Color.RED);
+		elf.drawRect(0, 50, width, height);
+	}
+	public void setCrazyDX(){
+		double dxRate = .005;
+		
+		changeDX(dxRate);
+		if(getDX() > 0){
+			if(getDX() > 100){
+				dxRate*=-1;
+			}
+		}
+		
+		if(getDX() < 0){
+			if(getDX() < -100){
+				dxRate*=-1;
+			}
+		}
+
+}
