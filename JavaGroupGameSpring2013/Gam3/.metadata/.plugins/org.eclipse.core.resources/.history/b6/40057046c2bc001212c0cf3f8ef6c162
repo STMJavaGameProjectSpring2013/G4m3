@@ -1,0 +1,8 @@
+
+public class PaulTempelExperientialObject extends GameObject{
+	
+	public opObject(){
+		
+	}
+
+}

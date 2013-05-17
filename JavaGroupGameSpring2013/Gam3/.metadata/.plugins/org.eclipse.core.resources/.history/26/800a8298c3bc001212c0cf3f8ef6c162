@@ -1,0 +1,13 @@
+import java.awt.Graphics;
+
+
+public class PaulTempelExperientialObject extends GameObject{
+	
+	public void opObject(String type, int w, int h){
+		
+	}
+	public void drawOPObject(Graphics elf){
+		
+	}
+
+}

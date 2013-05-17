@@ -1,0 +1,20 @@
+import java.awt.Graphics;
+
+
+public class PaulTempelExperientialObject extends GameObject{
+	
+	int width = 25;
+	int height = 25;
+	
+	public opObject(String type, int x, int y){
+		super(typeName, x, y);
+		
+		int width = this.
+		
+		this.setNewBBox(0, 50, width, height)
+	}
+	public void drawOPObject(Graphics elf){
+		
+	}
+
+}

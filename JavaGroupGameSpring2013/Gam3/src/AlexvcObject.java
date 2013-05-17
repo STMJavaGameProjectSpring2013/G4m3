@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
+import javax.swing.Timer;
+
 
 public class AlexvcObject extends GameObject{
 	
@@ -13,6 +15,13 @@ public class AlexvcObject extends GameObject{
 	//Re-Do to have xLoc, yLoc be in the upper right corner...
 	private int[] xList = new int[5];
 	private int[] yList = new int[5];
+	
+	//length from middle to any point
+	int L;
+	Timer t;
+	
+	int newAngle;
+	double newAngleRadians;
 
 
 	public AlexvcObject(String shapeName, int w, int h){
@@ -23,6 +32,8 @@ public class AlexvcObject extends GameObject{
 		
 		objW = 50;
 		objH = 50;
+		
+		L = (int)(Math.sqrt(1250));
 		//this.setBBoxExtras(0, -1, 50, 51);  -- not using this anymore
 		this.setNewBBox(0, 0, objW, objH);
 		
@@ -45,8 +56,17 @@ public class AlexvcObject extends GameObject{
 		yList[4] = yLoc +25;
 		*/
 		
+		int pivotX, pivotY;
+		double startAngle;
+		
+		
+		
+		
+		pivotX = xLoc+25;
+		pivotY = yLoc+25;
+		
 		//set hourglass points where xLoc yLoc is the upper right hand corner
-		xList[0] = xLoc;
+		/*xList[0] = xLoc;
 		xList[1] = xLoc+50;
 		xList[2] = xLoc+25;
 		xList[3] = xLoc;
@@ -56,8 +76,43 @@ public class AlexvcObject extends GameObject{
 		yList[1] = yLoc;
 		yList[2] = yLoc+25;
 		yList[3] = yLoc+50;
-		yList[4] = yLoc+50;
+		yList[4] = yLoc+50;*/
 		
+		/*xList[0] = pivotX - (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		xList[1] = pivotX + (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		xList[2] = pivotX;
+		xList[3] = pivotX - (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		xList[4] = pivotX + (int)(L*(Math.cos(Math.PI/4 + newAngleRadians)));
+		
+		yList[0] = pivotY - (int)(L*(Math.sin(Math.PI/4)));
+		yList[1] = pivotY - (int)(L*(Math.sin(Math.PI/4)));
+		yList[2] = pivotY;
+		yList[3] = pivotY + (int)(L*(Math.sin(Math.PI/4)));
+		yList[4] = pivotY + (int)(L*(Math.sin(Math.PI/4)));*/
+		
+		xList[0] = pivotX - (int)(L*(Math.cos(Math.PI/4)));
+		xList[1] = pivotX + (int)(L*(Math.cos(Math.PI/4)));
+		xList[2] = pivotX;
+		xList[3] = pivotX - (int)(L*(Math.cos(Math.PI/4)));
+		xList[4] = pivotX + (int)(L*(Math.cos(Math.PI/4)));
+		
+		yList[0] = pivotY - (int)(L*(Math.sin(Math.PI/4)));
+		yList[1] = pivotY - (int)(L*(Math.sin(Math.PI/4)));
+		yList[2] = pivotY;
+		yList[3] = pivotY + (int)(L*(Math.sin(Math.PI/4)));
+		yList[4] = pivotY + (int)(L*(Math.sin(Math.PI/4)));
+		
+		System.out.println("y2 = " + yList[2]);
+		//System.out.println("y3 = " + yList[3]);
+		
+		setNewAngle();
+		
+		newAngleRadians = Math.toRadians(newAngle);
+		
+		
+		
+		startAngle = (Math.random())*(2*Math.PI);
+				
 		//Draw the object
 		g.setColor(Color.BLUE);
 		g.fillPolygon(xList, yList, 5);
@@ -73,5 +128,17 @@ public class AlexvcObject extends GameObject{
 		g.fillOval(xLoc-2, yLoc-2, 5, 5);
 		
 	}
+	
+	public void setNewAngle() {
+		
+		++newAngle;
+		if(newAngle > 359){
+			newAngle = 0;
+			
+			
+		}
+		
+	}
+	
 	
 }

@@ -1,6 +1,77 @@
+import java.awt.Color;
+import java.awt.Graphics;
 
-public class paulTempelExperientialObject {
+
+public class PaulTempelExperientialObject extends GameObject{
 	
+	int width = 25;
+	int height = 25;
 	
+	public PaulTempelExperientialObject(String type, int x, int y){
+		super(type, x, y);
+		
+		this.setNewBBox(0, 50, width, height);
+	}
+	public void drawOpObject(Graphics elf){
+		elf.setColor(Color.RED);
+		elf.drawRect(0, 50, width, height);
+	}
+	public void setCrazyDX(){
+		double dxRate = .005;
+		
+		changeDX(dxRate);
+		if(getDX() > 0){
+			if(getDX() > 100){n
+				dxRate*=-1;
+			}
+		}
+		
+		if(getDX() < 0){
+			if(getDX() < -100){
+				dxRate*=-1;
+			}
+		}
+	}
+		public void checkBounds(int panelWidth, int panelHeight){
+			
+			int rightFrame = 15;
+			int bottomFrame = 30;
+			int MrRochePicBottom = 25;
+			
+			
+			//Check Left
+			if(getDX() < 0){
+				if(getXLoc() < 0){
+					setXLoc(0);
+					setDX(getDX()*-1);
+				}
+			}
+			
+			//Check right
+			if(getDX() > 0){
+				if((getXLoc()+getObjWidth()) > panelWidth){
+					setXLoc(panelWidth-getObjWidth());
+					setDX(getDX()*-1);
+				}
+			}
+			
+			//Check top
+			if(getDY() < 0){
+				if(getYLoc() < 0){
+					setYLoc(0);
+					setDY(getDY()*-1);
+				}
+			}
+			
+			//Check bottom
+			if(getDY() > 0){
+				if(getYLoc()+(int)(getObjHeight()-MrRochePicBottom) > panelHeight-bottomFrame){
+					setYLoc(panelHeight-(getObjHeight()-MrRochePicBottom)-bottomFrame);
+					setDY(getDY()*-1);
+				}
+			}
+			
+		
+		}
 
 }

@@ -246,7 +246,7 @@ public void drawAllGameObjects(Graphics g){
          DeachoObject swagbot2014;
          swagbot2014 = new DeachoObject("#SwagYolo",panelW,panelH,((int) Math.random()*3));
          swagbot2014.setDX(2);
-         swagbot2014.setDY(20);
+         swagbot2014.setDY(5);
          allGameObjects.add(swagbot2014);       
     }
 	public void doEthanSpawn(){

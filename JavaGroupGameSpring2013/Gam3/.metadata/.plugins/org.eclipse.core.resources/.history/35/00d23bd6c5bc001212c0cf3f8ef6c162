@@ -1,0 +1,397 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+
+public class GamePlayerPanel extends JPanel implements ActionListener {
+
+
+	private static final long serialVersionUID = 1L;
+
+
+	private static final String MrRocheObject = null;
+
+	
+	//Instance variables
+	private int panelW;
+	private int panelH;
+	private Color bColor;
+	private double dxRate = 0.01;
+	private JFrame myFrame;
+	
+	
+	
+
+        
+	ArrayList<GameObject> allGameObjects = new ArrayList<GameObject>();
+      
+	Timer t;
+	
+	public GamePlayerPanel(int w, int h, JFrame ff){
+		myFrame = ff;
+		panelW = w;
+		panelH = h;	
+		bColor = new Color((int)(Math.random()*25),(int)(Math.random()*25),(int)(Math.random()*150)+50);
+		
+		
+		MrRocheObject mrRocheObj1;
+		mrRocheObj1 = new MrRocheObject("Mr. Roche", (int)(w/2), (int)(h/2));
+		mrRocheObj1.setDX((Math.random()*9)+.5);
+		mrRocheObj1.setDY((Math.random()*9)+.5);
+		if((int)(Math.random()*100)+1 <50){
+			mrRocheObj1.setDX(mrRocheObj1.getDX()*-1);
+		}
+		if((int)(Math.random()*100)+1 <50){
+			mrRocheObj1.setDY(mrRocheObj1.getDX()*-1);
+		}
+		
+                
+		
+        DeachoObject decholol;
+        decholol=new DeachoObject("EachoObj", (int) w/4,(int)h/6,((int) Math.random()*3));
+        decholol.setDY(1);
+        decholol.setDX(5);
+       // decholol.setDX(5);
+        //decholol.setDY(5);
+ 
+                
+        //Alex VC Class Objects
+        AlexvcObject alexvcObj;
+        alexvcObj = new AlexvcObject("Alex", (int) w/2, (int) h/2);
+        alexvcObj.setDX(2);
+        alexvcObj.setDY(2);
+       
+        
+        //Ethan objects
+         EthanObject horrorshow;
+         horrorshow = new EthanObject("Ethan", (int) w/2, (int) h/2);
+         horrorshow.setDX(-5);
+         horrorshow.setDY(2);
+         
+        //Paul Object
+        PaulTempelExperientialObject opObject;
+        OpObject = new PaulTempelExperientialObject("Paul", (int) w/2, (int) h/2);
+        OpObject.setDX(4);
+        OpObject.setDY(-3);
+		
+		allGameObjects.add(mrRocheObj1);
+		allGameObjects.add(decholol);
+		allGameObjects.add(alexvcObj);
+        allGameObjects.add(horrorshow);//Ethan's Object
+        allGameObjects.add(OpObject);
+		
+       
+		t= new Timer(20, this);
+		t.start();
+	}
+	
+	
+	
+	public void paintComponent(Graphics g){
+		
+		if(myFrame.getWidth() != panelW){
+			panelW = myFrame.getWidth();
+		}
+		
+		if(myFrame.getHeight() != panelH){
+			panelH = myFrame.getHeight();
+		}
+		g.setColor(Color.gray);
+		g.fillRect(0, 0, myFrame.getWidth(), myFrame.getHeight());
+		
+	
+		//drawMrRocheObjects(g);
+		drawAllGameObjects(g);
+		
+       // decholol.drawObject(g);
+	}
+	
+	
+public void drawAllGameObjects(Graphics g){
+		
+		int listLength = allGameObjects.size();
+		for(int i = 0; i < listLength; ++i){
+                if(allGameObjects.get(i) instanceof MrRocheObject){
+                		allGameObjects.get(i).drawObject(g);
+                }
+                if(allGameObjects.get(i) instanceof DeachoObject){
+                		allGameObjects.get(i).drawObject(g);
+                }
+                if(allGameObjects.get(i) instanceof AlexvcObject){
+                    	//System.out.println("Trying to draw an alex");
+                    	//System.out.println("His dx dy are: " + allGameObjects.get(i).getDX() + ", " + allGameObjects.get(i).getDY());
+                        allGameObjects.get(i).drawObject(g);
+                 }
+                 if(allGameObjects.get(i) instanceof EthanObject){
+                	 	allGameObjects.get(i).drawObject(g);
+                 }
+		}
+	}
+	
+	
+
+
+
+	
+	public void actionPerformed(ActionEvent e) {
+		
+		//moveMrRocheObjects();
+		moveAllObjects();
+		repaint();	
+	}
+	
+	
+	// This is a method that allows moves any GAME OBJECT, so you can be
+	// an MrRocheObj, EachoObj, AlexVonCampeObj, EthanObj, dolceObj or TempelObj
+	// and you can still get moved here.
+	
+	public void moveAllObjects(){
+		int listLength = allGameObjects.size();
+		ArrayList<Integer> casualties = new ArrayList<Integer>();
+		for(int i = 0; i < listLength; ++i){
+			allGameObjects.get(i).moveObject();
+			allGameObjects.get(i).checkBounds(panelW,panelH);
+			checkCollision(allGameObjects.get(i));
+			
+			//Now do stuff for Spawning....
+			
+			if(allGameObjects.get(i).checkSpawnTime()==true){
+				if(allGameObjects.get(i) instanceof MrRocheObject){
+					doMrRocheSpawn();
+				}
+				if(allGameObjects.get(i) instanceof AlexvcObject){
+					doAlexvcSpawn();
+				}
+                if(allGameObjects.get(i) instanceof DeachoObject){
+                   doswagbotSpawn();
+                }
+			}
+		
+		
+			//And do stuff for Logans Runs Timed obsolescence....
+			if(allGameObjects.get(i).timeToKickIt() == true){
+				//System.out.println("it is time to Kick It for arrayList slot: " + i);
+				casualties.add(new Integer(i));
+				allGameObjects.get(i).setDX(0.0);
+				allGameObjects.get(i).setDY(0.0);
+				
+			}
+		
+			
+			//for MrRocheObjects  -- do not touch
+			/*
+			if(allGameObjects.get(i) instanceof MrRocheObject){
+				((MrRocheObject) allGameObjects.get(i)).setCrazyDX();
+			}	
+			*/
+		}  // END OF MAIN LOOP TO RUN THROUGH ALL OBJECTS
+		
+
+		//Clean up list--When its time to kick it you leave the list...
+		
+		
+		for(int i = 0; i<casualties.size(); ++i){
+			allGameObjects.remove(casualties.get(i).intValue());
+		}
+	
+	
+	}
+	
+	
+	
+	
+	public void doMrRocheSpawn(){
+		MrRocheObject mrRObj1;
+		mrRObj1 = new MrRocheObject("Mr. Roche", panelW,panelH);
+		mrRObj1.setDX(Math.random()+.01);
+		mrRObj1.setDY(Math.random()*10);
+		allGameObjects.add(mrRObj1);
+	}
+	
+	public void doAlexvcSpawn(){
+		
+		//System.out.println("SPAWN");
+		AlexvcObject alexvcObj2;
+		alexvcObj2 = new AlexvcObject("Alex", panelW, panelH);
+		alexvcObj2.setDX(2);
+		alexvcObj2.setDY(2);
+		allGameObjects.add(alexvcObj2);
+		
+	}
+     public void doswagbotSpawn(){
+         System.out.println("#SUCHSPAWN");
+         DeachoObject swagbot2014;
+         swagbot2014 = new DeachoObject("#SwagYolo",panelW,panelH,((int) Math.random()*3));
+         swagbot2014.setDX(2);
+         swagbot2014.setDY(20);
+         allGameObjects.add(swagbot2014);       
+    }
+	
+	
+	public int getPanelW(){
+		return panelW;
+	}
+	
+	public int getPanelH(){
+		return panelH;
+	}
+	
+	
+	public void checkCollision(GameObject testObject){
+		
+		GameObject otherObject;
+		//Check all the objects and handle any collisions....
+		for(int i = 0; i < allGameObjects.size(); ++i){
+			otherObject = allGameObjects.get(i);
+			
+			if(testObject != otherObject){
+				if(isACollision(testObject, otherObject) ==true){
+					//do something
+					//System.out.println("Collision between " + testObject.getObjIDString() + " and " + otherObject.getObjIDString());
+					bounceIt(testObject, otherObject);
+				}
+			}
+			
+		}
+	}
+			
+
+
+
+
+	public boolean isACollision(GameObject testObject, GameObject otherObject) {
+		boolean whatToReturn = true;
+		
+		int otherX, otherY, otherW, otherH;
+		int testX, testY, testW, testH;
+
+		
+		if ((otherObject.getBBoxXLoc()+otherObject.getBBoxW()) < testObject.getBBoxXLoc()) {
+			whatToReturn = false;
+		} else if (otherObject.getBBoxXLoc() > testObject.getBBoxXLoc()+testObject.getBBoxW()) {
+			whatToReturn = false;
+	
+		} else if ((otherObject.getBBoxYLoc()+otherObject.getBBoxH()) < testObject.getBBoxYLoc()) {
+			whatToReturn = false;
+		} else if (otherObject.getBBoxYLoc() > (testObject.getBBoxYLoc()+testObject.getBBoxH())) {
+			whatToReturn = false;
+		} 
+
+		return whatToReturn;
+	}
+
+	
+	
+	
+	public void bounceIt(GameObject testObject, GameObject otherObject){
+		 int difference;
+		 //X bounce
+		 if(testObject.getDX()> 0.0  && otherObject.getDX() <= 0.0){
+				if((testObject.getBBoxXLoc()+testObject.getBBoxW())>= otherObject.getBBoxXLoc()){
+					difference =(testObject.getBBoxXLoc()+ testObject.getBBoxW()) - otherObject.getBBoxXLoc();
+					testObject.setXLoc(testObject.getXLoc()-(int)(difference/2)-1);
+					otherObject.setXLoc(otherObject.getXLoc()+ (int)(difference/2));
+					
+				}
+				
+		 }	
+				
+		 if(testObject.getDX() < 0.0 && otherObject.getDX() >= 0.0){
+		 		if(testObject.getBBoxXLoc()<= (otherObject.getBBoxXLoc()+otherObject.getBBoxW())){
+					difference =(otherObject.getBBoxXLoc()+ otherObject.getBBoxW()) - testObject.getBBoxXLoc();
+					testObject.setXLoc(testObject.getXLoc()+(int)(difference/2)-1);
+					otherObject.setXLoc(otherObject.getXLoc()- (int)(difference/2));
+					
+				}
+		 }
+		 /*
+		 if(testObject.getDX() < 0.0 && otherObject.getDX() <= 0.0){
+			 if(testObject.getBBoxXLoc()<= (otherObject.getBBoxXLoc()+otherObject.getBBoxW())){
+				 if(testObject.getDX() < otherObject.getDX()){
+					 difference =(otherObject.getBBoxXLoc()+ otherObject.getBBoxW()) - testObject.getBBoxXLoc();
+					 testObject.setXLoc(testObject.getXLoc()+(int)(difference/2)-1);
+					 otherObject.setXLoc(otherObject.getXLoc()- (int)(difference/2));
+				 }
+			 }	   
+		 }
+		 
+		 if(testObject.getDX() > 0.0 && otherObject.getDX() >= 0.0){
+		 		if(testObject.getBBoxXLoc()<= (otherObject.getBBoxXLoc()+otherObject.getBBoxW())){
+		 			if(testObject.getDX() > otherObject.getDX()){
+		 				difference =(otherObject.getBBoxXLoc()+ otherObject.getBBoxW()) - testObject.getBBoxXLoc();
+		 				testObject.setXLoc(testObject.getXLoc()+(int)(difference/2)-1);
+		 				otherObject.setXLoc(otherObject.getXLoc()- (int)(difference/2));
+		 			}
+				}
+		 }
+		 */
+		 
+		
+		 
+		 //Y bounce
+		 if(testObject.getDY()> 0.0  && otherObject.getDY() <= 0.0){
+				if((testObject.getBBoxYLoc()+testObject.getBBoxH())>= otherObject.getBBoxYLoc()){
+					difference =(testObject.getBBoxYLoc()+ testObject.getBBoxH()) - otherObject.getBBoxYLoc();
+					testObject.setYLoc(testObject.getYLoc()-(int)(difference/2)-1);
+					otherObject.setYLoc(otherObject.getYLoc()+ (int)(difference/2));
+					
+				}
+				
+		 }	
+				
+		 if(testObject.getDY() < 0.0 && otherObject.getDY() >= 0.0){
+		 		if(testObject.getBBoxYLoc()<= (otherObject.getBBoxYLoc()+otherObject.getBBoxH())){
+					difference =(otherObject.getBBoxYLoc()+ otherObject.getBBoxH()) - testObject.getBBoxYLoc();
+					testObject.setYLoc(testObject.getYLoc()+(int)(difference/2)-1);
+					otherObject.setYLoc(otherObject.getYLoc()- (int)(difference/2));
+					
+				}
+		 }
+		 
+		 /*
+		 if(testObject.getDY() < 0.0 && otherObject.getDY() <= 0.0){
+			 if(testObject.getBBoxYLoc()<= (otherObject.getBBoxYLoc()+otherObject.getBBoxH())){
+				 difference =(otherObject.getBBoxYLoc()+ otherObject.getBBoxH()) - testObject.getBBoxYLoc();
+					testObject.setYLoc(testObject.getYLoc()+(int)(difference/2)-1);
+					otherObject.setYLoc(otherObject.getYLoc()- (int)(difference/2));
+			 }
+			  
+			 
+		 }
+		 
+		 if(testObject.getDY() > 0.0 && otherObject.getDY() >= 0.0){
+		 		if(testObject.getBBoxYLoc()<= (otherObject.getBBoxYLoc()+otherObject.getBBoxH())){
+					difference =(otherObject.getBBoxYLoc()+ otherObject.getBBoxH()) - testObject.getBBoxYLoc();
+					testObject.setYLoc(testObject.getYLoc()+(int)(difference/2)-1);
+					otherObject.setYLoc(otherObject.getYLoc()- (int)(difference/2));
+					
+				}
+		 }
+		 
+		 */
+		 
+	 
+		 
+		//switch dx and dy
+		double tempX = testObject.getDX();
+		testObject.setDX(otherObject.getDX());
+		otherObject.setDX(tempX);
+		
+		double tempY = testObject.getDY();
+		testObject.setDY(otherObject.getDY());
+		otherObject.setDY(tempY);
+		
+		//testObject.moveObject();
+		//otherObject.moveObject();
+		
+		repaint();
+	}
+	
+
+}
