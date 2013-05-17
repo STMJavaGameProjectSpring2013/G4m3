@@ -26,6 +26,9 @@ public class JavaGroupGameSpring2013 {
 		f.setVisible(true);
                //f.setResizable(false);
 				//Changed the window so game resizes with window... Mr. Roche.
+		System.out.println("This is my starting statement");
 	}
+	
+
 
 }
