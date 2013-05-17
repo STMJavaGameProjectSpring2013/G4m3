@@ -33,6 +33,8 @@ public class GamePlayerPanel extends JPanel implements ActionListener {
       
 	Timer t;
 	
+	ArrayList<Integer> casualties;
+	
 	public GamePlayerPanel(int w, int h, JFrame ff){
 		myFrame = ff;
 		panelW = w;
@@ -73,11 +75,16 @@ public class GamePlayerPanel extends JPanel implements ActionListener {
          ethObj = new EthanObject("Ethan", (int) w/2, (int) h/2);
          ethObj.setDX(-5);
          ethObj.setDY(2);
+         
+         //Test of Scary Alien Objects
+         //ScaryAlien alf;
+        // alf = new ScaryAlien("ScaryAlien", w, h);
 		
 		allGameObjects.add(mrRocheObj1);
 		allGameObjects.add(decholol);
 		allGameObjects.add(alexvcObj);
         allGameObjects.add(ethObj);//Ethan's Object
+       // allGameObjects.add(alf);
 		
        
 		t= new Timer(20, this);
@@ -124,6 +131,10 @@ public void drawAllGameObjects(Graphics g){
                  if(allGameObjects.get(i) instanceof EthanObject){
                 	 	allGameObjects.get(i).drawObject(g);
                  }
+                 
+                 if(allGameObjects.get(i) instanceof ScaryAlien){
+                	 	allGameObjects.get(i).drawObject(g);
+                 }
 		}
 	}
 	
@@ -146,12 +157,13 @@ public void drawAllGameObjects(Graphics g){
 	
 	public void moveAllObjects(){
 		int listLength = allGameObjects.size();
-		ArrayList<Integer> casualties = new ArrayList<Integer>();
+		casualties = new ArrayList<Integer>();
 		for(int i = 0; i < listLength; ++i){
 			allGameObjects.get(i).moveObject();
 			allGameObjects.get(i).checkBounds(panelW,panelH);
-			checkCollision(allGameObjects.get(i));
-			
+			checkCollision(allGameObjects.get(i), i);
+				
+		
 			//Now do stuff for Spawning....
 			
 			if(allGameObjects.get(i).checkSpawnTime()==true){
@@ -168,6 +180,9 @@ public void drawAllGameObjects(Graphics g){
                     doEthanSpawn();
                  }
 			}
+			
+			//Do Scary Alien Spawn....Its different...
+			doScaryAlienSpawn();
 		
 		
 			//And do stuff for Logans Runs Timed obsolescence....
@@ -194,6 +209,14 @@ public void drawAllGameObjects(Graphics g){
 		
 		for(int i = 0; i<casualties.size(); ++i){
 			allGameObjects.remove(casualties.get(i).intValue());
+		}
+		int howManyCasualties = casualties.size();
+		for(int i = 0; i<howManyCasualties; ++i){
+			casualties.remove(0);
+		}
+		
+		if(casualties.size() > 0){
+			System.out.println("Something is wrong with casualties...");
 		}
 	
 	
@@ -234,6 +257,17 @@ public void drawAllGameObjects(Graphics g){
 		allGameObjects.add(ethanObj);
 	}
 	
+	
+	public void doScaryAlienSpawn(){
+		int randomNum = (int)(Math.random()*1000000)+1;
+		//System.out.println("Hi from doScaryAlien, randNum = " + randomNum);
+		if(randomNum < 500){
+			ScaryAlien alf;
+			alf = new ScaryAlien("ScaryAlien", panelW, panelH);
+			allGameObjects.add(alf);
+		}
+	}
+	
 	public int getPanelW(){
 		return panelW;
 	}
@@ -243,7 +277,7 @@ public void drawAllGameObjects(Graphics g){
 	}
 	
 	
-	public void checkCollision(GameObject testObject){
+	public void checkCollision(GameObject testObject, int testObjectIndex){
 		
 		GameObject otherObject;
 		//Check all the objects and handle any collisions....
@@ -255,6 +289,15 @@ public void drawAllGameObjects(Graphics g){
 					//do something
 					//System.out.println("Collision between " + testObject.getObjIDString() + " and " + otherObject.getObjIDString());
 					bounceIt(testObject, otherObject);
+					if(testObject instanceof ScaryAlien){
+						addToCasualtyList(i);
+						
+					}
+					if(otherObject instanceof ScaryAlien){
+						addToCasualtyList(testObjectIndex);
+						
+					}
+					
 				}
 			}
 			
@@ -392,6 +435,15 @@ public void drawAllGameObjects(Graphics g){
 		
 		repaint();
 	}
+	
+	
+
+    public void addToCasualtyList(int whichObjectIndex){
+    
+    	System.out.println("Adding to casualty list number... " + whichObjectIndex);
+
+    	casualties.add(new Integer(whichObjectIndex));
+    }
 	
 
 }

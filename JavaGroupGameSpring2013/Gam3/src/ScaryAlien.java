@@ -14,23 +14,23 @@ public class ScaryAlien extends GameObject {
 
 
 	Image mainImage;
-	Image image45;
-	Image image135;
+	//Image image45;
+	//Image image135;
 	
 	boolean pictureLoaded = false;
-	static int MrRocheObjCount = 0;
-	int whichMrRoche=0;
+	static int scaryAlienCount = 0;
+	int whichScaryAlien=0;
 
 	public ScaryAlien(String typeName, int x, int y) {
 		super(typeName, x, y);
-		//System.out.println("Hi from the top of the constructor MrRocheObject");
+		//System.out.println("Hi from the top of the constructor Scary Alien");
 		
 		ClassLoader cl = Thread.currentThread().getContextClassLoader();
-		//System.out.println("Hi the class loader C1 is good");
+		//System.out.println("Hi the class loader C1 is good in Scary Alien");
 		InputStream input1 = ClassLoader.getSystemResourceAsStream("scaryAlienBlue.png");
 		
-		MrRocheObjCount++;
-		whichMrRoche=MrRocheObjCount;
+		scaryAlienCount++;
+		whichScaryAlien=scaryAlienCount;
 		
 		try{
 			
@@ -42,11 +42,11 @@ public class ScaryAlien extends GameObject {
 			pictureLoaded = true;
 			
 			//this.setBBoxExtras(0, 25, objW, (int)(objH/2)+5);
-			this.setNewBBox(0, 25, objW, (int)(objH/2)+5);
+			this.setNewBBox(10, 25, (int)(objW/6), (int)(objH/6));
 			
 			
 		} catch(IOException e){
-			System.out.println("We have a problem loading images in MrRoche Object");
+			System.out.println("We have a problem loading images in Scary Alien Object");
 			e.printStackTrace();
 			
 		}
@@ -57,24 +57,17 @@ public class ScaryAlien extends GameObject {
 		
 		if(pictureLoaded){
 			
-			if(getAngle() >29.0 && getAngle() < 61.0){
-				g.drawImage(image45, xLoc, yLoc, objW, objH, null);
-			} else {
-				if(getAngle() >119.0 && getAngle() < 151.0){
-					g.drawImage(image135, xLoc, yLoc, objW, objH, null);
-				} else {
-					g.drawImage(mainImage, xLoc, yLoc, objW, objH, null);
-				}
-				
-			}
+		
+			g.drawImage(mainImage, xLoc, yLoc, objW, objH, null);
+			 
 			
 			//This Draws the Bounding Box
 			g.setColor(Color.RED);
 			g.drawRect(xLoc+this.newBBoxX, yLoc+this.newBBoxY,this.newBBoxW, this.newBBoxH);
 			
-			g.setColor(Color.WHITE);
+			//g.setColor(Color.WHITE);
 			//g.drawString(("Mr.Roche "+whichMrRoche),  xLoc -(int)(objW/4) , yLoc+(int)(objH/2));
-			g.drawString(this.getObjIDString(),  xLoc  , yLoc+(int)(objH/2));
+			//g.drawString(this.getObjIDString(),  xLoc  , yLoc+(int)(objH/2));
 			
 			//Draw the xLoc, yLoc
 			g.setColor(Color.MAGENTA);
