@@ -15,7 +15,7 @@ public class GamePlayerPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 
-	private static final String MrRocheObject = null;
+	//private static final String MrRocheObject = null;
 
 	
 	//Instance variables
@@ -261,7 +261,7 @@ public void drawAllGameObjects(Graphics g){
 	public void doScaryAlienSpawn(){
 		int randomNum = (int)(Math.random()*1000000)+1;
 		//System.out.println("Hi from doScaryAlien, randNum = " + randomNum);
-		if(randomNum < 500){
+		if(randomNum < 100){
 			ScaryAlien alf;
 			alf = new ScaryAlien("ScaryAlien", panelW, panelH);
 			allGameObjects.add(alf);
